@@ -1,0 +1,15 @@
+{%extends "layout/base.html" %}
+
+{% block title %}
+{{error_code}} Error
+{% endblock %}
+
+{%block content%}
+<div class="container" style="width: 100%;">
+    <div class="row">
+        <div class="col display-1" id="text" style="font-weight: bold; margin: 20% 35%;">
+            {{error_code}} Error
+        </div>
+    </div>
+</div>
+{% endblock %}

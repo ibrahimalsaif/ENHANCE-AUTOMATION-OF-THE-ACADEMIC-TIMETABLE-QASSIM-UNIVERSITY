@@ -1,0 +1,92 @@
+{%extends "layout/base.html" %}
+
+{% block title %}
+New Course
+{% endblock %}
+
+{%block content%}
+<div class="container mt-5 mb-5 border" style="width: 45%;">
+    <form action="/add_course" method="POST">
+        <h2 class="text-center mt-2">
+            Add New Course
+        </h2>
+        <div class="form-group mt-2">
+            <label>Course Name</label>
+        </div>
+        <div class="form-group mt-2">
+            <input type="text" class="form-control" name="name" placeholder="MATH218" required>
+        </div>
+        <div class="form-group mt-2">
+            <label>Course Credit</label>
+        </div>
+        <div class="form-group mt-2">
+            <input type="text" class="form-control" name="credit" placeholder="3" required>
+        </div>
+        <div class="form-group mt-2">
+            <label>Course Instructor</label>
+        </div>
+        <div class="form-group mt-2">
+            <select class="form-select" name="instructor_id" aria-label="Default select example" required>
+                {% for instructor in instructors %}
+                <option value="{{ instructor.id }}">{{ instructor.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Previos Requirement</label>
+        </div>
+        <div class="form-group mt-2">
+            <select class="form-select" name="pre_req" aria-label="Default select example">
+                <option value="None" selected>None</option>
+                {% for course in courses %}
+                <option value="{{ course.name }}">{{ course.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Co Requirement</label>
+        </div>
+        <div class="form-group mt-2">
+            <select class="form-select" name="co_req" aria-label="Default select example">
+                <option value="None" selected>None</option>
+                {% for course in courses %}
+                <option value="{{ course.name }}">{{ course.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Is the course a lab?</label>
+        </div>
+        <div class="form-group mt-2">
+            <select class="form-select" name="is_lab" aria-label="Default select example">
+                <option value="True">Yes</option>
+                <option value="False">No</option>
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Departments</label>
+              (press ctrl to select multiple departments)
+        </div>
+        <div class="form-group mt-2">
+            <select class="form-select" name="common" size="3" multiple aria-label="multiple select example">
+                {% for department in departments %}
+                <option value="{{ department.name }}">{{ department.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Type of course</label>
+        </div>
+        <div class="form-group mt-2">
+            <select class="form-select" name="priority" aria-label="Default select example" required>
+                <option value="5">Compulsory course from department</option>
+                <option value="6">Elective course from department</option>
+                <option value="7">Elective course from college</option>
+              </select>
+        </div>
+        <div class="form-group mt-3 mb-3">
+            <input class="btn btn-warning" type="submit" value="Submit" style="margin-left: 45%;">
+        </div>
+    </form>
+</div>
+{% endblock %}

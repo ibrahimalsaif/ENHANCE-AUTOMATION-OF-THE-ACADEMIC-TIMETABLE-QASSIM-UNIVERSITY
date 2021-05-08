@@ -1,0 +1,45 @@
+{%extends "layout/base.html" %}
+
+{% block title %}
+Edit Student Plan Courses
+{% endblock %}
+
+{%block content%}
+<div style="margin-top: 10%;">
+    <div class="container mt-5 mb-5 border" style="width: 45%;">
+        <form action="/studentplan/{{ studentplan_course_data.student_plan_id }}/edit_course/{{ studentplan_course_data.id }}" method="POST">
+            <h2 class="text-center mt-2">
+                Edit <em>{{ studentplan_course_data.course.name }}</em>
+            </h2>
+            <div class="form-group mt-2">
+                <label>Course</label>
+            </div>
+            <div class="form-group mt-2">
+                <select value="{{ studentplan_course_data.course_id }}" class="form-select" name="course_id" aria-label="Default select example">
+                    {% for course in courses %}
+                    <option value="{{ course.id }}" {{ "selected='selected'" if studentplan_course_data.course_id == course.id else "" }}>{{ course.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group mt-2">
+                <label>Level</label>
+            </div>
+            <div class="form-group mt-2">
+                <select value="{{ studentplan_course_data.level }}" class="form-select" name="level" aria-label="Default select example">
+                    <option value=1 {{ "selected='selected'" if studentplan_course_data.level == 1 else "" }}>1</option>
+                    <option value=2 {{ "selected='selected'" if studentplan_course_data.level == 2 else "" }}>2</option>
+                    <option value=3 {{ "selected='selected'" if studentplan_course_data.level == 3 else "" }}>3</option>
+                    <option value=4 {{ "selected='selected'" if studentplan_course_data.level == 4 else "" }}>4</option>
+                    <option value=5 {{ "selected='selected'" if studentplan_course_data.level == 5 else "" }}>5</option>
+                    <option value=6 {{ "selected='selected'" if studentplan_course_data.level == 6 else "" }}>6</option>
+                    <option value=7 {{ "selected='selected'" if studentplan_course_data.level == 7 else "" }}>7</option>
+                    <option value=8 {{ "selected='selected'" if studentplan_course_data.level == 8 else "" }}>8</option>
+                </select>
+            </div>
+            <div class="form-group mt-3 mb-3">
+                <input class="btn btn-warning" type="submit" value="Save Changes" style="margin-left: 42%;">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

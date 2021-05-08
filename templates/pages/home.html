@@ -1,0 +1,30 @@
+{%extends "layout/base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+{% endblock %}
+
+{%block content%}
+<div class="container" id="homepage-con">
+    <div id="shape1">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M41.9,-74.7C53.4,-65.9,61.1,-52.8,68.6,-39.7C76.1,-26.5,83.2,-13.3,83.1,-0.1C83,13.2,75.7,26.3,67.6,38.4C59.5,50.4,50.6,61.3,39.2,70C27.8,78.7,13.9,85.1,-1.3,87.3C-16.5,89.6,-33,87.6,-46.1,79.9C-59.2,72.2,-68.9,58.8,-74.4,44.5C-79.9,30.3,-81.2,15.1,-81.2,0C-81.2,-15.1,-79.9,-30.3,-72.9,-41.9C-65.9,-53.6,-53.2,-61.9,-40.1,-69.8C-27,-77.7,-13.5,-85.2,0.8,-86.7C15.2,-88.2,30.4,-83.5,41.9,-74.7Z" transform="translate(100 100)" /></svg>
+    </div>
+    <div id="shape2">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M42.1,-47.2C52.2,-41.7,56.3,-26.2,62.2,-8.6C68.2,9,76,28.7,70.4,42.8C64.8,56.9,45.9,65.4,29.6,63.5C13.4,61.7,-0.1,49.5,-18.8,45.4C-37.5,41.3,-61.5,45.3,-70.1,37.2C-78.6,29.1,-71.8,8.8,-68.2,-12.1C-64.6,-33,-64.2,-54.5,-53.4,-59.8C-42.5,-65.2,-21.3,-54.3,-2.6,-51.2C16,-48.1,32,-52.7,42.1,-47.2Z" transform="translate(100 100)" /></svg>
+    </div>
+    <div id="title">
+        <h1>ENHANCE AUTOMATION OF THE ACADEMIC TIMETABLE: QASSIM UNIVERSITY</h1>
+    </div>
+    <div id="des">
+        <p>The timetable is one of the essential things in any educational institute. Because if
+            the timetable was made perfectly it will help everyone either it’s a student,
+            instructor, and an administration member in having a good semester free of failure.
+            And creating the timetable is a complex task that takes so much time, so we made it
+            easier with this web app, you can create timetables in a click of a butoon.</p>
+    </div>
+</div>
+{% endblock %}

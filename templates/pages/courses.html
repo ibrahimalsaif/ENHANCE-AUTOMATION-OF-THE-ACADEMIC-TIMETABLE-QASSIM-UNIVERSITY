@@ -1,0 +1,93 @@
+{%extends "layout/base.html" %}
+
+{% block title %}
+Courses
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='courses.css') }}">
+{% endblock %}
+
+{%block content%}
+<div class="container" id="datapage-con">
+    <div class="row">
+        <div class="col-md-auto" id="courses-text">
+            Courses
+        </div>
+        <div class="col-md-auto align-self-end">
+            <button id="new-button" class="btn btn-warning" onclick="location.href='{{ url_for('addCourse') }}'" type="button">Add new course</button>
+        </div>
+    </div>
+    <div>
+        <table id="courses-table" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Credit</th>
+                    <th>Instrctor</th>
+                    <th>Pre Requirement</th>
+                    <th>CO Requirement</th>
+                    <th>Is Lab?</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>{{course.name}}</td>
+                    <td>{{course.credit}}</td>
+                    <td>{{course.instructor}}</td>
+                    {% if course.pre_req %}
+                    <td>{{course.pre_req}}</td>
+                    {% else %}
+                    <td><span class="material-icons">clear</span></td>
+                    {% endif %}
+                    {% if course.co_req %}
+                    <td>{{course.co_req}}</td>
+                    {% else %}
+                    <td><span class="material-icons">clear</span></td>
+                    {% endif %}
+                    {% if course.is_lab %}
+                    <td><span class="material-icons">done</span></td>
+                    {% else %}
+                    <td><span class="material-icons">clear</span></td>
+                    {% endif %}
+                    <td>
+                        <a href="/courses/{{ course.id }}/edit"><span class="material-icons icon">create</span></a>
+                        <a data-bs-toggle="modal" data-bs-target="#deleteModal{{course.id}}" href="#"><span class="material-icons icon">delete</span></a>
+                        <div class="modal fade" id="deleteModal{{course.id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete course</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                          Are you sure you want to delete this course?
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button onclick="location.href='{{ url_for('deleteCourse', id=course.id ) }}'" type="button" class="btn btn-danger">Delete</button>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+$(document).ready(function () {
+    $('#courses-table').DataTable({
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,66 @@
+{%extends "layout/base.html" %}
+
+{% block title %}
+Edit WorkTime
+{% endblock %}
+
+{%block content%}
+<div style="margin-top: 7%;">
+    <div class="container mt-5 mb-5 border" style="width: 45%;">
+        <form action="/worktime/{{worktime_data.id}}/edit" method="POST">
+            <h2 class="text-center mt-2">
+                {% if worktime_data.day == 1 %}
+                Edit <em>Sunday</em> WorkTime
+                {% elif worktime_data.day == 2 %}
+                Edit <em>Monday</em> WorkTime
+                {% elif worktime_data.day == 3 %}
+                Edit <em>Tuesday</em> WorkTime
+                {% elif worktime_data.day == 4 %}
+                Edit <em>Wednesday</em> WorkTime
+                {% else %}
+                Edit <em>Thursday</em> WorkTime
+                {% endif %}
+            </h2>
+            <div class="form-group mt-2">
+                <label>Day</label>
+            </div>
+            <div class="form-group mt-2">
+                <select value="{{ worktime_data.day }}" class="form-select" name="day" aria-label="Default select example">
+                    <option value="1" {{ "selected='selected'" if worktime_data.day == 1 else "" }}>Sunday</option>
+                    <option value="2" {{ "selected='selected'" if worktime_data.day == 2 else "" }}>Monday</option>
+                    <option value="3" {{ "selected='selected'" if worktime_data.day == 3 else "" }}>Tuesday</option>
+                    <option value="4" {{ "selected='selected'" if worktime_data.day == 4 else "" }}>Wednesday</option>
+                    <option value="5" {{ "selected='selected'" if worktime_data.day == 5 else "" }}>Thursday</option>
+                </select>
+            </div>
+            <div class="form-group mt-2">
+                <label>Start Time</label>
+            </div>
+            <div class="form-group mt-2">
+                <input type="time" class="form-control" name="start_time" value="{{ worktime_data.start_time }}" required>
+            </div>
+            <div class="form-group mt-2">
+                <label>End Time</label>
+            </div>
+            <div class="form-group mt-2">
+                <input type="time" class="form-control" name="end_time" value="{{ worktime_data.end_time }}" required>
+            </div>
+            <div class="form-group mt-2">
+                <label>Break Time Start</label>
+            </div>
+            <div class="form-group mt-2">
+                <input type="time" class="form-control" name="break_time_start" value="{{ worktime_data.break_time_start }}">
+            </div>
+            <div class="form-group mt-2">
+                <label>Break Time End</label>
+            </div>
+            <div class="form-group mt-2">
+                <input type="time" class="form-control" name="break_time_end" value="{{ worktime_data.break_time_end }}">
+            </div>
+            <div class="form-group mt-3 mb-3">
+                <input class="btn btn-warning" type="submit" value="Save Changes" style="margin-left: 42%;">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{%extends "layout/base.html" %}
+
+{% block title %}
+WorkTime
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='worktime.css') }}">
+{% endblock %}
+
+{%block content%}
+<div class="container" id="datapage-con">
+    <div class="row mt-5">
+        <div class="col-md-auto" id="worktime-text">
+            WorkTime
+        </div>
+        <div class="col-md-auto align-self-end">
+            <button id="new-button" class="btn btn-warning" onclick="location.href='{{ url_for('addWorktime') }}'" type="button">Add new worktime</button>
+        </div>
+    </div>
+    <div>
+        <table id="worktime-table" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Break Time Start</th>
+                    <th>Break Time End</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for worktime in worktimes %}
+                <tr>
+                    {% if worktime.day == 1 %}
+                    <td>Sunday</td>
+                    {% elif worktime.day == 2 %}
+                    <td>Monday</td>
+                    {% elif worktime.day == 3 %}
+                    <td>Tuesday</td>
+                    {% elif worktime.day == 4 %}
+                    <td>Wednesday</td>
+                    {% else %}
+                    <td>Thursday</td>
+                    {% endif %}
+                    <td>{{worktime.start_time}}</td>
+                    <td>{{worktime.end_time}}</td>
+                    {% if worktime.break_time_start %}
+                    <td>{{worktime.break_time_start}}</td>
+                    {% else %}
+                    <td><span class="material-icons">clear</span></td>
+                    {% endif %}
+                    {% if worktime.break_time_end %}
+                    <td>{{worktime.break_time_end}}</td>
+                    {% else %}
+                    <td><span class="material-icons">clear</span></td>
+                    {% endif %}
+                    <td>
+                        <a href="/worktime/{{ worktime.id }}/edit"><span class="material-icons icon">create</span></a>
+                        <a data-bs-toggle="modal" data-bs-target="#deleteModal{{worktime.id}}" href="#"><span class="material-icons icon">delete</span></a>
+                        <div class="modal fade" id="deleteModal{{worktime.id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete WorkTime</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                          Are you sure you want to delete this worktime?
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button onclick="location.href='{{ url_for('deleteWorktime', id=worktime.id ) }}'" type="button" class="btn btn-danger">Delete</button>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+$(document).ready(function () {
+    $('#worktime-table').DataTable({
+    });
+});
+</script>
+{% endblock %}

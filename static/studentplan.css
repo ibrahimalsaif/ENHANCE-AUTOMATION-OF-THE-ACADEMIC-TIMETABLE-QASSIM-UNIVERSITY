@@ -1,0 +1,35 @@
+#datapage-con {
+    margin-top: 1%;
+}
+
+#options-text {
+    font-size: 150%;
+}
+
+#options {
+    font-size: 150%;
+}
+
+#student-plan-text {
+    font-size: 450%;
+    font-weight: bold;
+    margin-left: 31%;
+}
+
+.icon {
+    padding-left: 21%;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: grey;
+}
+
+#new-button {
+    width: 100%;
+    margin-left: 249%;
+    margin-bottom: 5%;
+}

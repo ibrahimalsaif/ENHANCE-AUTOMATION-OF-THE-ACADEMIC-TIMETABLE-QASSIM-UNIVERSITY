@@ -1,0 +1,92 @@
+{%extends "layout/base.html" %}
+
+{% block title %}
+Edit Course
+{% endblock %}
+
+{%block content%}
+<div class="container mt-5 mb-5 border" style="width: 45%;">
+    <form action="/courses/{{course_data.id}}/edit" method="POST">
+        <h2 class="text-center mt-2">
+            Edit <em>{{ course_data.name }}</em> Course
+        </h2>
+        <div class="form-group mt-2">
+            <label>Course Name</label>
+        </div>
+        <div class="form-group mt-2">
+            <input type="text" class="form-control" name="name" value="{{course_data.name}}" required>
+        </div>
+        <div class="form-group mt-2">
+            <label>Course Credit</label>
+        </div>
+        <div class="form-group mt-2">
+            <input type="text" class="form-control" name="credit" value="{{ course_data.credit }}" required>
+        </div>
+        <div class="form-group mt-2">
+            <label>Course Instructor</label>
+        </div>
+        <div class="form-group mt-2">
+            <select value="{{ course_data.instructor.id }}" class="form-select" aria-label="Default select example" name="instructor_id">
+                {% for instructor in instructors %}
+                <option value="{{ instructor.id }}" {{ "selected='selected'" if course_data.instructor.id == instructor.id else "" }}>{{ instructor.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Previos Requirement</label>
+        </div>
+        <div class="form-group mt-2">
+            <select value="{{ course_data.pre_req }}" class="form-select" aria-label="Default select example" name="pre_req">
+                <option value="None" {{ "selected='selected'" if course_data.pre_req == None else "" }}>None</option>
+                {% for course in courses %}
+                <option value="{{ course.name }}" {{ "selected='selected'" if course_data.pre_req == course.name else "" }}>{{ course.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Co Requirement</label>
+        </div>
+        <div class="form-group mt-2">
+            <select value="{{ course_data.co_req }}" class="form-select" aria-label="Default select example" name="co_req">
+                <option value="None" {{ "selected='selected'" if course_data.co_req == None else "" }}>None</option>
+                {% for course in courses %}
+                <option value="{{ course.name }}" {{ "selected='selected'" if course_data.co_req == course.name else "" }}>{{ course.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Is the course a lab?</label>
+        </div>
+        <div class="form-group mt-2">
+            <select value="{{ course_data.is_lab }}" class="form-select" aria-label="Default select example" name="is_lab">
+                <option value="True" {{ "selected='selected'" if course_data.is_lab == True else "" }}>Yes</option>
+                <option value="False" {{ "selected='selected'" if course_data.is_lab == False else "" }}>No</option>
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Departments</label>
+              (press ctrl to select multiple departments)
+        </div>
+        <div class="form-group mt-2">
+            <select class="form-select" size="3" multiple aria-label="multiple select example" name="common">
+                {% for department in departments %}
+                <option value="{{ department.name }}">{{ department.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Type of course</label>
+        </div>
+        <div class="form-group mt-2">
+            <select value="{{ course_data.priority }}" class="form-select" aria-label="Default select example" name="priority">
+                <option value="5" {{ "selected='selected'" if course_data.priority == 5 else "" }}>Compulsory course from department</option>
+                <option value="6" {{ "selected='selected'" if course_data.priority == 6 else "" }}>Elective course from department</option>
+                <option value="7" {{ "selected='selected'" if course_data.priority == 7 else "" }}>Elective course from college</option>
+              </select>
+        </div>
+        <div class="form-group mt-3 mb-3">
+            <input class="btn btn-warning" type="submit" value="Save Changes" style="margin-left: 42%;">
+        </div>
+    </form>
+</div>
+{% endblock %}

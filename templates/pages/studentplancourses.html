@@ -1,0 +1,74 @@
+{%extends "layout/base.html" %}
+
+{% block title %}
+Student Plan Courses
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='studentplancourse.css') }}">
+{% endblock %}
+
+{%block content%}
+<div class="container" id="datapage-con">
+    <div class="row">
+        <div class="col-md-auto" id="student-plan-course-text">
+            <em>{{paln_name.name}}</em> Plan
+        </div>
+        <div class="col-md-auto align-self-end">
+            <button id="new-button" class="btn btn-warning" onclick="location.href='{{ url_for('addStudentPlanCourses',id=paln_name.id) }}'" type="button">Add new course</button>
+        </div>
+    </div>
+    <div>
+        <table id="student-plan-course-table" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Level</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student_plan_course in student_plan_courses %}
+                <tr>
+                    <td>{{student_plan_course.course}}</td>
+                    <td>{{student_plan_course.level}}</td>
+                    <td>
+                        <a href="/studentplan/{{ student_plan_course.student_plan }}/edit_course/{{ student_plan_course.id }}"><span class="material-icons icon">create</span></a>
+                        <a data-bs-toggle="modal" data-bs-target="#deleteModal{{student_plan_course.student_plan}}and{{student_plan_course.id}}" href="#"><span class="material-icons icon">delete</span></a>
+                        <div class="modal fade" id="deleteModal{{student_plan_course.student_plan}}and{{student_plan_course.id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete course</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                          Are you sure you want to delete this course from the plan?
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button onclick="location.href='{{ url_for('deleteStudentPlanCourses', id=student_plan_course.student_plan , courseId=student_plan_course.id ) }}'" type="button" class="btn btn-danger">Delete</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                          </div>                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+$(document).ready(function () {
+    $('#student-plan-course-table').DataTable({
+    });
+});
+var myModal = new bootstrap.Modal(document.getElementById('deleteModal'), options)
+</script>
+{% endblock %}

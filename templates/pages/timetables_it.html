@@ -1,0 +1,247 @@
+{%extends "layout/base.html" %}
+
+{% block title %}
+IT TimeTables
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='timetables.css') }}">
+{% endblock %}
+
+{%block content%}
+<div class="container" id="datapage-con">
+    <button data-bs-toggle="modal" data-bs-target="#regenerateModal" id="regenerate-button" class="btn btn-warning" onclick="location.href='#'" type="button">Regenerate</button>
+    <div class="modal fade" id="regenerateModal" tabindex="-1" aria-labelledby="regenerateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="regenerateModalLabel">Regenerate Timetables</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to regenerate all of IT timetables?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button onclick="location.href='{{ url_for('regenerateTimetablesIT') }}'" type="button"
+                            class="btn btn-danger">Regenerate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination-container">
+        <div data-page="1">
+            <div class="d-flex justify-content-center level">
+                Level 1
+            </div>
+            <div class="d-flex justify-content-center">
+                <table>
+                    <thead>
+                        <tr class="tr-style">
+                            <td class="tr-style"></td>
+                            <td class="td-style"  style="width: 160px">Sunday</td>
+                            <td class="td-style"  style="width: 160px">Monday</td>
+                            <td class="td-style"  style="width: 160px">Tuesday</td>
+                            <td class="td-style"  style="width: 160px">Wednesday</td>
+                            <td class="td-style"  style="width: 160px">Thursday</td>
+                        </tr>
+                    </thead>
+                    <tbody id="level1">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div data-page="2" style="display:none;">
+            <div class="d-flex justify-content-center level">
+                Level 2
+            </div>
+            <div class="d-flex justify-content-center">
+                <table>
+                    <thead>
+                        <tr class="tr-style">
+                            <td class="tr-style"></td>
+                            <td class="td-style">Sunday</td>
+                            <td class="td-style">Monday</td>
+                            <td class="td-style">Tuesday</td>
+                            <td class="td-style">Wednesday</td>
+                            <td class="td-style">Thursday</td>
+                        </tr>
+                    </thead>
+                    <tbody id="level2">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div data-page="3" style="display:none;">
+            <div class="d-flex justify-content-center level">
+                Level 3
+            </div>
+            <div class="d-flex justify-content-center">
+                <table>
+                    <thead>
+                        <tr class="tr-style">
+                            <td class="tr-style"></td>
+                            <td class="td-style">Sunday</td>
+                            <td class="td-style">Monday</td>
+                            <td class="td-style">Tuesday</td>
+                            <td class="td-style">Wednesday</td>
+                            <td class="td-style">Thursday</td>
+                        </tr>
+                    </thead>
+                    <tbody id="level3">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div data-page="4" style="display:none;">
+            <div class="d-flex justify-content-center level">
+                Level 4
+            </div>
+            <div class="d-flex justify-content-center">
+                <table>
+                    <thead>
+                        <tr class="tr-style">
+                            <td class="tr-style"></td>
+                            <td class="td-style">Sunday</td>
+                            <td class="td-style">Monday</td>
+                            <td class="td-style">Tuesday</td>
+                            <td class="td-style">Wednesday</td>
+                            <td class="td-style">Thursday</td>
+                        </tr>
+                    </thead>
+                    <tbody id="level4">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div data-page="5" style="display:none;">
+            <div class="d-flex justify-content-center level">
+                Level 5
+            </div>
+            <div class="d-flex justify-content-center">
+                <table>
+                    <thead>
+                        <tr class="tr-style">
+                            <td class="tr-style"></td>
+                            <td class="td-style">Sunday</td>
+                            <td class="td-style">Monday</td>
+                            <td class="td-style">Tuesday</td>
+                            <td class="td-style">Wednesday</td>
+                            <td class="td-style">Thursday</td>
+                        </tr>
+                    </thead>
+                    <tbody id="level5">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div data-page="6" style="display:none;">
+            <div class="d-flex justify-content-center level">
+                Level 6
+            </div>
+            <div class="d-flex justify-content-center">
+                <table>
+                    <thead>
+                        <tr class="tr-style">
+                            <td class="tr-style"></td>
+                            <td class="td-style">Sunday</td>
+                            <td class="td-style">Monday</td>
+                            <td class="td-style">Tuesday</td>
+                            <td class="td-style">Wednesday</td>
+                            <td class="td-style">Thursday</td>
+                        </tr>
+                    </thead>
+                    <tbody id="level6">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div data-page="7" style="display:none;">
+            <div class="d-flex justify-content-center level">
+                Level 7
+            </div>
+            <div class="d-flex justify-content-center">
+                <table>
+                    <thead>
+                        <tr class="tr-style">
+                            <td class="tr-style"></td>
+                            <td class="td-style">Sunday</td>
+                            <td class="td-style">Monday</td>
+                            <td class="td-style">Tuesday</td>
+                            <td class="td-style">Wednesday</td>
+                            <td class="td-style">Thursday</td>
+                        </tr>
+                    </thead>
+                    <tbody id="level7">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div data-page="8" style="display:none;">
+            <div class="d-flex justify-content-center level">
+                Level 8
+            </div>
+            <div class="d-flex justify-content-center">
+                <table>
+                    <thead>
+                        <tr class="tr-style">
+                            <td class="tr-style"></td>
+                            <td class="td-style">Sunday</td>
+                            <td class="td-style">Monday</td>
+                            <td class="td-style">Tuesday</td>
+                            <td class="td-style">Wednesday</td>
+                            <td class="td-style">Thursday</td>
+                        </tr>
+                    </thead>
+                    <tbody id="level8">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <nav class="d-flex justify-content-center" aria-label="Page navigation example">
+            <div class="pagination pagination-centered mt-2">
+                <ul class="pagination">
+                    <li class="page-item" data-page="-"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item" data-page="1"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item" data-page="2"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item" data-page="3"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item" data-page="4"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item" data-page="5"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item" data-page="6"><a class="page-link" href="#">6</a></li>
+                    <li class="page-item" data-page="7"><a class="page-link" href="#">7</a></li>
+                    <li class="page-item" data-page="8"><a class="page-link" href="#">8</a></li>
+                    <li class="page-item" data-page="+"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    {% include "js/table.js" %}
+</script>
+<script>
+    $(document).ready(paginationHandler);
+    var level1 = {{ level1 | tojson }};
+    var level2 = {{ level2 | tojson }};
+    var level3 = {{ level3 | tojson }};
+    var level4 = {{ level4 | tojson }};
+    var level5 = {{ level5 | tojson }};
+    var level6 = {{ level6 | tojson }};
+    var level7 = {{ level7 | tojson }};
+    var level8 = {{ level8 | tojson }};
+    addDataToTable(level1, "level1", "content1");
+    addDataToTable(level2, "level2", "content2");
+    addDataToTable(level3, "level3", "content3");
+    addDataToTable(level4, "level4", "content4");
+    addDataToTable(level5, "level5", "content5");
+    addDataToTable(level6, "level6", "content6");
+    addDataToTable(level7, "level7", "content7");
+    addDataToTable(level8, "level8", "content8");
+</script>
+{% endblock %}
